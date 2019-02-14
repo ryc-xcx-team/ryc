@@ -1,13 +1,17 @@
-//格式化时间
-let formatTime = date => {
+//格式化时间 年-月-日 时：分：秒
+let formatTime = (date,flag) => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
   const hour = date.getHours()
   const minute = date.getMinutes()
   const second = date.getSeconds()
-
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  if(flag){
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+  }else{
+    return [year, month, day].map(formatNumber).join('-');
+  }
+ 
 }
 //格式化数字
 let formatNumber = n => {
@@ -35,7 +39,7 @@ let formatLocation = (longitude, latitude)=> {
 let showBusy = text => wx.showToast({
     title: text,
     icon:'loading',
-    duration:10000
+    duration:2000
 })
 
 //显示成功提示
@@ -61,10 +65,11 @@ let jsonToUrl = (json) => {
     return str.join("&");
 }
 
+
 module.exports = { 
     formatTime, 
     showBusy, 
     showSuccess, 
     showModel,
-    jsonToUrl 
+    jsonToUrl
 }
